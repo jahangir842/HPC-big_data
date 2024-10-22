@@ -1,46 +1,4 @@
-To set up and run Apache PySpark on multiple virtual machines (VMs), you'll need to configure a Spark cluster. Here's a comprehensive guide to help you through the process:
 
-### Prerequisites
-1. **Virtual Machines**: Prepare four VMs. One will act as the master node, and the remaining three will serve as worker nodes.
-2. **Java Development Kit (JDK)**: Apache Spark requires JDK 8 or later. Ensure Java is installed on all VMs.
-3. **SSH Access**: Set up passwordless SSH access from the master node to all the worker nodes.
-
----
-
-### Step-by-Step Guide
-
-#### Step 1: Install Java on All VMs
-Start by installing Java on each virtual machine:
-
-```bash
-sudo apt update
-sudo apt install openjdk-11-jdk -y
-```
-
-Verify that Java is correctly installed:
-
-```bash
-java -version
-```
-
-#### Step 2: Download and Install Apache Spark
-Download Spark on each VM. Choose a version that fits your needs (e.g., Spark 3.2.1 with Hadoop 3.2):
-
-```bash
-wget https://downloads.apache.org/spark/spark-3.2.1/spark-3.2.1-bin-hadoop3.2.tgz
-tar xvf spark-3.2.1-bin-hadoop3.2.tgz
-sudo mv spark-3.2.1-bin-hadoop3.2 /opt/spark
-```
-
-#### Step 3: Set Up Environment Variables
-Add Spark and Java environment variables to the `.bashrc` file on each VM:
-
-```bash
-echo 'export SPARK_HOME=/opt/spark' >> ~/.bashrc
-echo 'export PATH=$PATH:$SPARK_HOME/bin:$JAVA_HOME/bin' >> ~/.bashrc
-echo 'export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64' >> ~/.bashrc
-source ~/.bashrc
-```
 
 #### Step 4: Configure SSH Access
 On the master node, generate an SSH key and distribute it to each worker node for passwordless access:
